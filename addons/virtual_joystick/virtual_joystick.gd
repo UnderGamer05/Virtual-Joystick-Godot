@@ -42,6 +42,10 @@ enum Visibility_mode {
 @export var action_up := "ui_up"
 @export var action_down := "ui_down"
 
+@export_group("textures")
+@export var texture_base := Texture2D
+@export var texture_tip := Texture2D
+
 # PUBLIC VARIABLES
 
 ## If the joystick is receiving inputs.
@@ -64,7 +68,13 @@ var _touch_index : int = -1
 
 # FUNCTIONS
 
+
 func _ready() -> void:
+	if texture_base:
+		_base.texture = texture_base
+	if texture_tip:
+		_tip.texture = texture_tip
+	
 	if ProjectSettings.get_setting("input_devices/pointing/emulate_mouse_from_touch"):
 		printerr("The Project Setting 'emulate_mouse_from_touch' should be set to False")
 	if not ProjectSettings.get_setting("input_devices/pointing/emulate_touch_from_mouse"):
